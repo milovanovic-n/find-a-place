@@ -10,4 +10,9 @@
     height: 100%;
     background: radial-gradient(circle, rgba(255,255,255, 0.4) 0%, rgba(255,255,255,0) 50%, rgba(148,187,233,0) 100%);
   }
+
+  .button {
+    @apply px-4 py-2 border rounded-full cursor-pointer hover:shadow-lg active:scale-95
+    active:bg-gray-100 transition transform duration-100 ease-out
+  }
 }
