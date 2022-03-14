@@ -3,9 +3,10 @@ import React from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import InfoCard from "../components/InfoCard"
+import Map from "../components/Map.jsx"
 import { format } from "date-fns";
 
-function Search({searchResults}) {
+function Search({searchResults, MAPBOX_KEY}) {
   const router = useRouter();
   const { location, startDate, endDate, numberOfGuests } = router.query;
   const formattedStartDate = format(new Date(startDate), "dd MMMM yy");
@@ -48,6 +49,10 @@ function Search({searchResults}) {
         }
         </div>
       </section>
+
+      <section className='hidden lg:inline-flex lg:min-w-[450px]'>
+        <Map  searchResults={searchResults} MAPBOX_KEY={MAPBOX_KEY}/>
+      </section>
     </main>
 
       <Footer />
@@ -63,7 +68,8 @@ export async function getServerSideProps(/* Context */) {
 
   return {
     props: {
-      searchResults
+      searchResults,
+      MAPBOX_KEY: process.env.MAPBOX_KEY
     }
   }
 }
