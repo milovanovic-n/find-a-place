@@ -31,4 +31,6 @@ const userSchema = mongoose.Schema({
     type: String,
   },
   /* Make relationship between user and posts he created */
-})
+});
+
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);
