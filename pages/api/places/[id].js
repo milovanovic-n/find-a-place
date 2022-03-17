@@ -9,7 +9,6 @@ export default async (req, res) => {
     query: {id},
     method
   } = req;
-
   switch(method) {
     case "GET":
       try {
@@ -27,6 +26,9 @@ export default async (req, res) => {
       break;
 
     case "PUT":
+      /*
+        Will need to add authorization
+      */
       try {
         // Find place by id
         const place = await Place.findByIdAndUpdate(id, req.body, {
@@ -45,6 +47,9 @@ export default async (req, res) => {
       break;
     
     case "DELETE":
+      /*
+        Will need to add authorization
+      */
       try {
         const deletedPlace = await Place.deleteOne({ _id: id });
 

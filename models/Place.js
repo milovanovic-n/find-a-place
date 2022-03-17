@@ -37,8 +37,9 @@ const placeSchema = new mongoose.Schema({
   available: {
     type: Boolean,
     default: true
-  }
+  },
   /* Make relationship between place and a user that created it */
+  author: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
 });
 
 module.exports = mongoose.models.Place || mongoose.model("Place", placeSchema);

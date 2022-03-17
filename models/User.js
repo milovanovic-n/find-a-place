@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema({
     type: String,
   },
   /* Make relationship between user and posts he created */
+  posts: [{type: mongoose.Schema.Types.ObjectId, ref: "Place"}]
 });
 
 module.exports = mongoose.models.User || mongoose.model("User", userSchema);

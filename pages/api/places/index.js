@@ -17,6 +17,9 @@ export default async function(req, res) {
       break;
     
     case "POST":
+      /*
+        Will need to add authorization
+      */
       try {
         const place = await Place.create(req.body);
         res.status(201).json({success: true, data: place});
