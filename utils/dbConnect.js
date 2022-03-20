@@ -1,20 +1,26 @@
-import mongoose from "mongoose";
+import { MongoClient } from "mongodb"; 
 
-const connection = {}
+let cachedClient = null;
+let cachedDb = null;
+const client = new MongoClient(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+const dbName = "find-place";
 
 async function dbConnect() {
   /* if database is connected return from function */
-  if(connection.isConnected) {
-    return;
+  if(cachedClient && cachedDb) {
+    return {client: cachedClient, db: cachedDb};
   }
   /* if not connected then setup connection */
-  const db = await mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
+  await client.connect();
+  const db = await client.db(dbName);
 
-  connection.isConnected = db.connections[0].readyState;
-  console.log(connection.isConnected);
+  cachedClient = client;
+  cachedDb = db;
+
+  return {client, db};
 }
 
 export default dbConnect;

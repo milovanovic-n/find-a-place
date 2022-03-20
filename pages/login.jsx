@@ -1,10 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import Router from 'next/router';
 import { getProviders, getSession } from "next-auth/react"
+import LoginBtn from '../components/LoginBtn';
+import SignUpForm from '../components/SignUpForm';
 
 function Login({providers, session}) {
-  console.log({providers, session})
+
+  useEffect(() => {
+    //if(session) return Router.push("/")
+  }, [session])
+
   return (
-    <div>Login</div>
+    <div>
+      <LoginBtn provider={providers.google} />
+      <LoginBtn provider={providers.facebook} />
+      <SignUpForm />
+    </div>
   )
 }
 
